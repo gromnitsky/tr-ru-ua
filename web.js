@@ -29,21 +29,34 @@ let btn_reset_hook = function(textarea) {
     }
 }
 
+
 /* Main */
 document.addEventListener('DOMContentLoaded', () => {
-    let ru = document.getElementById('ru')
-    let ua = document.getElementById('ua')
+    let ru = document.querySelector('#ru')
+    let rut = ru.querySelector('textarea')
+    let ua = document.querySelector('#ua')
+    let uat = ua.querySelector('textarea')
 
-    scroll_mirror(ru, ua)
-    scroll_mirror(ua, ru)
+    scroll_mirror(rut, uat)
+    scroll_mirror(uat, rut)
 
-    btn_reset_hook(ru)
+    btn_reset_hook(rut)
 
+    // react on input
     let tr_debounced = debounce(function() {
-	tr(ru, ua)
-	ua.scrollTop = ru.scrollTop
+	tr(rut, uat)
+	uat.scrollTop = rut.scrollTop
+    }, 200)
+    rut.addEventListener('input', tr_debounced)
+
+    // update status
+    let rui = ru.querySelector('.info')
+    let uai = ua.querySelector('.info')
+    let status_debounced = debounce(function() {
+	rui.innerHTML = rut.value.length
+	uai.innerHTML = uat.value.length
     }, 250)
-    ru.addEventListener('input', tr_debounced)
+    rut.addEventListener('input', status_debounced)
 })
 
 

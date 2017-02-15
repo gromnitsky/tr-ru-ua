@@ -25,9 +25,8 @@
         padding-right: 4em;
       }
 
-      #ru__area {
+      .text--editable {
         position: relative;
-        margin-top: -1em;
       }
 
       .btn--reset {
@@ -45,6 +44,11 @@
         background-color: #e81123;
         color: white;
       }
+
+      .status {
+        display: flex;
+        flex-direction: row;
+      }
     </style>
 
   </head>
@@ -57,19 +61,27 @@
 
     <noscript><h1>JavaScript ES6 is required</h1></noscript>
 
-    <p>
-      Russian
-    </p>
-    <div id="ru__area">
-      <button class="btn--reset">X</button>
-      <textarea id="ru" rows="6"
-		placeholder="Однажды, в студёную зимнюю пору"></textarea>
+    <div id="ru">
+      <div class="status">
+	<div style="flex-grow: 1">Input</div>
+	<div class="info">0</div>
+      </div>
+      <div class="text--editable">
+	<button class="btn--reset">X</button>
+	<textarea rows="6" maxlength="512"
+		  placeholder="Однажды, в студёную зимнюю пору"></textarea>
+      </div>
     </div>
 
-    <p>
-      Result (read-only)<br>
-      <textarea id="ua" rows="6" readonly spellcheck="false"></textarea>
-    </p>
+    <br>
+
+    <div id="ua">
+      <div class="status">
+	<div style="flex-grow: 1">Output (read-only)</div>
+	<div class="info">0</div>
+      </div>
+      <textarea rows="6" readonly spellcheck="false"></textarea>
+    </div>
 
     <hr>
 

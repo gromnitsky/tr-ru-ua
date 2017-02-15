@@ -13,6 +13,13 @@
         }
       }
 
+      hr {
+        margin-top: 5em;
+        border: none;
+        height: 1px;
+        background-color: black;
+      }
+
       textarea {
         width: calc(100% - 4em);
         padding-right: 4em;
@@ -27,7 +34,7 @@
         position: absolute;
         top: 5px;
         right: 1px;
-        border: 1px solid black;
+        border: 1px solid gray;
         border-radius: 50%;
         color: black;
         background-color: white;
@@ -48,7 +55,7 @@
       from Russian to Ukrainian
     </h1>
 
-    <noscript><h1>JavaScript is required</h1></noscript>
+    <noscript><h1>JavaScript ES6 is required</h1></noscript>
 
     <p>
       Russian
@@ -63,6 +70,11 @@
       Result (read-only)<br>
       <textarea id="ua" rows="6" readonly spellcheck="false"></textarea>
     </p>
+
+    <hr>
+
+    "<b>Дон Жуан</b> <i>(хрумтить кацапською баранкою)</i>. Думи мої, думи
+    мої, лихо мені з вами..."
 
     <script src="lib.js"></script>
     <script src="web.js"></script>

@@ -9,5 +9,10 @@
 	"ukrainian"
     ],
     "author": "Alexander Gromnitsky",
-    "license": "MIT"
+    "license": "MIT",
+    "repository": {
+	"type": "git",
+	"url": "git://github.com/gromnitsky/tr-ru-ua.git"
+    },
+    "bin": "./tr-ru-ua"
 }

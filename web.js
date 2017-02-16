@@ -9,16 +9,6 @@ let scroll_mirror = function(from, to) {
     })
 }
 
-let tr = function(from, to) {
-    let r = []
-    let prev = ''
-    for (let ch of from.value) {
-	r.push(tr_ru_ua.subst(ch, prev))
-	prev = ch
-    }
-    to.value = r.join('')
-}
-
 let btn_reset_hook = function(textarea) {
     let btn = textarea.previousElementSibling // bwaa!
     btn.onclick = function() {
@@ -43,20 +33,20 @@ document.addEventListener('DOMContentLoaded', () => {
     btn_reset_hook(rut)
 
     // react on input
-    let tr_debounced = debounce(function() {
-	tr(rut, uat)
+    let tr = debounce(function() {
+	uat.value = tr_ru_ua.trans(rut.value)
 	uat.scrollTop = rut.scrollTop
     }, 200)
-    rut.addEventListener('input', tr_debounced)
+    rut.addEventListener('input', tr)
 
     // update status
     let rui = ru.querySelector('.info')
     let uai = ua.querySelector('.info')
-    let status_debounced = debounce(function() {
+    let status = debounce(function() {
 	rui.innerHTML = rut.value.length
 	uai.innerHTML = uat.value.length
     }, 250)
-    rut.addEventListener('input', status_debounced)
+    rut.addEventListener('input', status)
 })
 
 

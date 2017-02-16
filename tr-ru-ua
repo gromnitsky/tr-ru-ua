@@ -2,10 +2,6 @@
 
 let ru_ua = require('./lib')
 
-let prev = ''
 process.stdin.on('data', data => {
-    for (let ch of data.toString()) {
-	process.stdout.write(ru_ua.subst(ch, prev))
-	prev = ch
-    }
+    process.stdout.write(ru_ua.trans(data.toString()))
 })

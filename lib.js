@@ -45,10 +45,11 @@ let tr_ru_ua = {};
 
     let subst = function(src, prev) {
 	let dest = tbl[src]
-	if (!dest) return src
+	if (!dest) return src || ''
 
 	if (typeof dest !== 'object') return dest
 
+	prev = prev || ''
 	if (prev.match(/\s/) || prev === '') return dest.b
 	if (isvowel(prev)) return dest.v
 	return dest.c

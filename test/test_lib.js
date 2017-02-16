@@ -6,9 +6,6 @@ let assert = require('assert')
 let ru_ua = require('../lib')
 
 suite('lib', function() {
-    setup(function() {
-    })
-
     test('subst', function() {
 	assert.equal(ru_ua.subst('Ё', null), 'Йо')
 	assert.equal(ru_ua.subst('', null), '')
@@ -20,5 +17,13 @@ suite('lib', function() {
 
 	assert.equal(ru_ua.subst('и'), 'і')
 	assert.equal(ru_ua.subst('q', 'q'), 'q')
+    })
+
+    test('trans', function() {
+	assert.equal(ru_ua.trans(), '')
+	assert.equal(ru_ua.trans(''), '')
+
+	assert.equal(ru_ua.trans('Однажды, в студёную зимнюю пору'),
+		     'Однажди, в студьоную зімнюю пору')
     })
 })

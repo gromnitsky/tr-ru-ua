@@ -61,8 +61,19 @@ let tr_ru_ua = {};
 	    .some( el => ch === el)
     }
 
+    let trans = function(str) {
+	let r = []
+	let prev
+	for (let ch of str || '') {
+	    r.push(subst(ch, prev))
+	    prev = ch
+	}
+	return r.join('')
+    }
+
     exports.capitalize = capitalize
     exports.subst = subst
     exports.isvowel = isvowel
+    exports.trans = trans
 
 })(typeof exports === 'object' ? exports : tr_ru_ua)

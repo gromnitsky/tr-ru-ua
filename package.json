@@ -1,6 +1,6 @@
 {
     "name": "tr-ru-ua",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Transliteration from Russian to Ukrainian. E.g. a dull 'Однажды, в студёную зимнюю пору' becomes a jolly good 'Однажди, в студьоную зімнюю пору'.",
     "main": "lib.js",
     "keywords": [

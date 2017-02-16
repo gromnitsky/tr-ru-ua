@@ -9,13 +9,13 @@ let scroll_mirror = function(from, to) {
     })
 }
 
-let btn_reset_hook = function(textarea) {
-    let btn = textarea.previousElementSibling // bwaa!
+let btn_clear_hook = function(btn, textarea) {
     btn.onclick = function() {
 	textarea.value = ''
 	// trigger input event
 	textarea.dispatchEvent(new Event('input'))
 	textarea.focus()
+	return false
     }
 }
 
@@ -24,13 +24,14 @@ let btn_reset_hook = function(textarea) {
 document.addEventListener('DOMContentLoaded', () => {
     let ru = document.querySelector('#ru')
     let rut = ru.querySelector('textarea')
+    let ruc = ru.querySelector('.btn--clear')
     let ua = document.querySelector('#ua')
     let uat = ua.querySelector('textarea')
 
     scroll_mirror(rut, uat)
     scroll_mirror(uat, rut)
 
-    btn_reset_hook(rut)
+    btn_clear_hook(ruc, rut)
 
     // react on input
     let tr = debounce(function() {

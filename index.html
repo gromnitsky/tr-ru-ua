@@ -21,28 +21,17 @@
       }
 
       textarea {
-        width: calc(100% - 4em);
-        padding-right: 4em;
+        width: 100%;
       }
 
-      .text--editable {
-        position: relative;
+      .btn--clear {
+        padding: 0 5px;
       }
 
-      .btn--reset {
-        position: absolute;
-        top: 5px;
-        right: 1px;
-        border: 1px solid gray;
-        border-radius: 50%;
-        color: black;
-        background-color: white;
-      }
-
-      .btn--reset:hover {
-        border: 1px solid #e81123;
+      .btn--clear:hover {
         background-color: #e81123;
         color: white;
+        text-decoration: none;
       }
 
       .status {
@@ -63,14 +52,12 @@
 
     <div id="ru">
       <div class="status">
-	<div style="flex-grow: 1">Input</div>
+	<div style="flex-grow: .1">Input (max 512 chars)</div>
+	<div style="flex-grow: 1"><a href="#" class="btn--clear">Clear</a></div>
 	<div class="info">0</div>
       </div>
-      <div class="text--editable">
-	<button class="btn--reset">X</button>
-	<textarea rows="6" maxlength="512"
-		  placeholder="Однажды, в студёную зимнюю пору"></textarea>
-      </div>
+      <textarea rows="6" maxlength="512"
+		placeholder="Однажды, в студёную зимнюю пору"></textarea>
     </div>
 
     <br>

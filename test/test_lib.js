@@ -26,4 +26,12 @@ suite('lib', function() {
 	assert.equal(ru_ua.trans('Однажды, в студёную зимнюю пору'),
 		     'Однажди, в студьоную зімнюю пору')
     })
+
+    test('mixed case', function() {
+	assert.equal(ru_ua.trans('ЁМАЁ wSx'), 'ЙОМАЙО wSx')
+	assert.equal(ru_ua.trans('Ёмаё'), 'Йомайо')
+	assert.equal(ru_ua.trans('ЁМаё'), 'ЙОМайо')
+	assert.equal(ru_ua.trans('ёмаЁ'), 'йомаЙо')
+	assert.equal(ru_ua.trans('ёмАЁ'), 'йомАЙО')
+    })
 })

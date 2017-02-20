@@ -1,4 +1,4 @@
-// ru -> ua
+// utf-8, ru -> ua
 
 'use strict';
 
@@ -19,61 +19,64 @@ let tr_ru_ua = {};
 	'ъ': "'",
     }
 
-    let capitalize = function(str) {
-	return str = str[0].toUpperCase() + str.slice(1)
-    }
-
-    // All praise JavaScript!
-    let dup = function(obj) {
-	return JSON.parse(JSON.stringify(obj))
-    }
-
-    // modify TABLE in-place
-    let tbl_add_upper = function(table) {
-	for (let key in table) {
-	    let val = dup(table[key])
-	    if (typeof val === 'object') {
-		for (let attr in val) val[attr] = capitalize(val[attr])
-		table[key.toUpperCase()] = val
-	    } else {
-		table[key.toUpperCase()] = capitalize(table[key])
-	    }
-	}
-    }
-
-    tbl_add_upper(tbl)
-
-    let subst = function(src, prev) {
-	let dest = tbl[src]
-	if (!dest) return src || ''
-
-	if (typeof dest !== 'object') return dest
-
-	prev = prev || ''
-	if (prev.match(/\s/) || prev === '') return dest.b
-	if (isvowel(prev)) return dest.v
-	return dest.c
-    }
-
-    let isvowel = function(ch) {
-	ch = ch.toLowerCase()
-	return ['а', 'и', 'о', 'у', 'ы', 'э', 'е', 'ё', 'ю', 'я']
-	    .some( el => ch === el)
-    }
-
     let trans = function(str) {
+	if (!str) return ''
+
 	let r = []
-	let prev
-	for (let ch of str || '') {
-	    r.push(subst(ch, prev))
-	    prev = ch
+	for (let idx = 0; idx < str.length; ++idx) {
+	    r.push(subst(str[idx], str[idx-1], str[idx+1]))
 	}
 	return r.join('')
     }
 
-    exports.capitalize = capitalize
-    exports.subst = subst
-    exports.isvowel = isvowel
+    let subst = function(ch, prev, next) {
+	if (!ch) return ''
+
+	let nominee = tbl[ch.toLowerCase()]
+	if (!nominee) return ch
+
+	if (typeof nominee !== 'object') {
+	    // a simple 1 to 1
+	    return isupper(ch) ? nominee.toUpperCase() : nominee
+	}
+
+	prev = prev || ''
+	if (prev.match(/\s/) || prev === '') {
+	    nominee = nominee.b
+	} else if (isvowel(prev)) {
+	    nominee = nominee.v
+	} else {
+	    nominee = nominee.c
+	}
+
+	if (!isupper(ch)) return nominee
+
+	if (isupper(prev) || isupper(next)) return nominee.toUpperCase()
+	return capitalize(nominee)
+    }
+
+    let capitalize = function(str) {
+	return str = str[0].toUpperCase() + str.slice(1)
+    }
+
+    let isupper = function(ch) {
+	if (!ch) return false
+	// don't laugh, /^[А-Я]$/ doesn't work
+	return ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л',
+		'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш',
+		'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я'].indexOf(ch) !== -1
+    }
+
+    let isvowel = function(ch) {
+	if (!ch) return false
+	return ['а', 'и', 'о', 'у', 'ы', 'э', 'е', 'ё', 'ю', 'я']
+	    .indexOf(ch.toLowerCase()) !== -1
+    }
+
     exports.trans = trans
+    exports.subst = subst
+    exports.capitalize = capitalize
+    exports.isupper = isupper
+    exports.isvowel = isvowel
 
 })(typeof exports === 'object' ? exports : tr_ru_ua)

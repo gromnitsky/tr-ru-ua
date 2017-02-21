@@ -22,11 +22,11 @@ let btn_clear_hook = function(btn, textarea) {
 let btn_copy_hook = function(btn, textarea) {
     btn.onclick = function() {
 	let orig = [textarea.selectionStart, textarea.selectionEnd,
-		    textarea.selectionDirection]
+		    textarea.selectionDirection] // the current selection state
 	textarea.select()
 	document.execCommand('copy', false, null)
 	// restore user selection
-	HTMLTextAreaElement.prototype.setSelectionRange.apply(textarea, orig)
+	textarea.setSelectionRange(...orig)
 	return false
     }
 }

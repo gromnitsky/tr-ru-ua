@@ -24,14 +24,22 @@
         width: 100%;
       }
 
-      .btn--clear {
+      .btn {
         padding: 0 5px;
+      }
+
+      .btn:hover {
+        text-decoration: none;
       }
 
       .btn--clear:hover {
         background-color: #e81123;
         color: white;
-        text-decoration: none;
+      }
+
+      .btn--copy:hover {
+        background-color: gray;
+        color: white;
       }
 
       .status {
@@ -52,8 +60,8 @@
 
     <div id="ru">
       <div class="status">
-	<div style="flex-grow: .1">Input (max 1024 chars)</div>
-	<div style="flex-grow: 1"><a href="#" class="btn--clear">Clear</a></div>
+	<div style="width: 30%">Input (max 1024 chars)</div>
+	<div style="flex-grow: 1"><a href="#" class="btn btn--clear">Clear</a></div>
 	<div class="info">0</div>
       </div>
       <textarea rows="6" maxlength="1024"
@@ -64,7 +72,12 @@
 
     <div id="ua">
       <div class="status">
-	<div style="flex-grow: 1">Output (read-only)</div>
+	<div style="width: 30%">Output (read-only)</div>
+	<div style="flex-grow: 1">
+	  <a href="#" class="btn btn--copy" title="the whole text to Clipboard">
+	    Copy
+	  </a>
+	</div>
 	<div class="info">0</div>
       </div>
       <textarea rows="6" readonly spellcheck="false"></textarea>

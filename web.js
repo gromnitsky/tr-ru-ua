@@ -19,6 +19,18 @@ let btn_clear_hook = function(btn, textarea) {
     }
 }
 
+let btn_copy_hook = function(btn, textarea) {
+    btn.onclick = function() {
+	let orig = [textarea.selectionStart, textarea.selectionEnd,
+		    textarea.selectionDirection]
+	textarea.select()
+	document.execCommand('copy', false, null)
+	// restore user selection
+	HTMLTextAreaElement.prototype.setSelectionRange.apply(textarea, orig)
+	return false
+    }
+}
+
 
 /* Main */
 document.addEventListener('DOMContentLoaded', () => {
@@ -27,11 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let ruc = ru.querySelector('.btn--clear')
     let ua = document.querySelector('#ua')
     let uat = ua.querySelector('textarea')
+    let uac = ua.querySelector('.btn--copy')
 
     scroll_mirror(rut, uat)
     scroll_mirror(uat, rut)
 
     btn_clear_hook(ruc, rut)
+    btn_copy_hook(uac, uat)
 
     // react on input
     let tr = debounce(function() {

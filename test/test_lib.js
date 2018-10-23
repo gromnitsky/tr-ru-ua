@@ -14,6 +14,7 @@ suite('lib', function() {
 	assert.equal(ru_ua.subst('Ё', ''), 'Йо')
 	assert.equal(ru_ua.subst('ё', ''), 'йо')
 	assert.equal(ru_ua.subst('ё', 'л'), 'ьо')
+	assert.equal(ru_ua.subst('ё', 'ь'), 'йо')
 
 	assert.equal(ru_ua.subst('и'), 'і')
 	assert.equal(ru_ua.subst('q', 'q'), 'q')
@@ -25,6 +26,14 @@ suite('lib', function() {
 
 	assert.equal(ru_ua.trans('Однажды, в студёную зимнюю пору'),
 		     'Однажди, в студьоную зімнюю пору')
+
+	assert.equal(ru_ua.trans('льёшь'), 'льйошь')
+	assert.equal(ru_ua.trans('спокойствии'), 'спокойствії')
+	assert.equal(ru_ua.trans('объём'), "об'йом")
+	assert.equal(ru_ua.trans('семьи'), "сємьї")
+	assert.equal(ru_ua.trans('пьет'), "пьєт")
+	assert.equal(ru_ua.trans('пьёт'), "пьйот")
+	assert.equal(ru_ua.trans('братьев'), "братьєв")
     })
 
     test('mixed case', function() {

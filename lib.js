@@ -6,11 +6,17 @@ let tr_ru_ua = {};
 
 (function(exports) {
     let tbl = {
-	'и': 'і',
+	'и': {
+	    ss: "ї",		// after a soft sign
+	    b: "і",
+	    v: "ї",
+	    c: "і"
+	},
 	'ы': 'и',
 	'э': 'є',
 	'е': 'є',
 	'ё': {
+	    ss: 'йо',
 	    b: 'йо',		// in the beginning of a word
 	    v: 'йо',		// after a vowel
 	    c: 'ьо',		// after a consonant
@@ -43,6 +49,8 @@ let tr_ru_ua = {};
 	prev = prev || ''
 	if (prev.match(/\s/) || prev === '') {
 	    nominee = nominee.b
+	} else if (prev === 'ь' || prev === 'ъ') { // soft/hard signs
+	    nominee = nominee.ss
 	} else if (isvowel(prev)) {
 	    nominee = nominee.v
 	} else {
